@@ -89,7 +89,7 @@ class Dumper {
 	 *
 	 * @return string
 	 */
-	public function getBacktraceHtml()
+	protected function getBacktraceHtml()
 	{
 		$export = $this->getBacktrace();
 

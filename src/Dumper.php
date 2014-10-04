@@ -20,7 +20,7 @@ class Dumper {
 	/**
 	 * @var array
 	 */
-	protected $default_config = [
+	static public $default_config = [
 		'clear'     => true,
 		'backtrace' => true,
 		'exit'      => true
@@ -31,7 +31,7 @@ class Dumper {
 	 */
 	function __construct($config = [])
 	{
-		$this->config = $config + $this->default_config;
+		$this->config = $config + self::$default_config;
 	}
 
 

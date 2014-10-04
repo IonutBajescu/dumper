@@ -36,16 +36,6 @@ class Dumper {
 
 
 	/**
-	 * @param $k
-	 *
-	 * @return array
-	 */
-	public function config($k)
-	{
-		return $this->config[$k];
-	}
-
-	/**
 	 * Dump parameters in pretty format.
 	 *
 	 * @param mixed $var,... unlimited Variables to be dumped.
@@ -56,7 +46,7 @@ class Dumper {
 		$this->callNumber++;
 		$output = '';
 
-		if ($this->config('clear')) {
+		if ($this->config['clear']) {
 			$this->clearAllBuffers();
 		}
 
@@ -64,7 +54,7 @@ class Dumper {
 			$output .= '<pre>' . var_export($var, true) . '</pre>';
 		}
 
-		if ($this->config('backtrace')) {
+		if ($this->config['backtrace']) {
 			$output .= $this->getBacktraceHtml();
 		}
 
@@ -72,7 +62,7 @@ class Dumper {
 			echo $output;
 		}
 
-		if ($this->config('exit')) {
+		if ($this->config['exit']) {
 			exit;
 		}
 

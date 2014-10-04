@@ -29,7 +29,7 @@ class Dumper {
 	/**
 	 * @param $config
 	 */
-	function __construct($config)
+	function __construct($config = [])
 	{
 		$this->config = $config + $this->default_config;
 	}
@@ -49,27 +49,34 @@ class Dumper {
 	 * Dump parameters in pretty format.
 	 *
 	 * @param mixed $var,... unlimited Variables to be dumped.
+	 * @return string
 	 */
 	public function dump()
 	{
 		$this->callNumber++;
-
+		$output = '';
 
 		if ($this->config('clear')) {
 			$this->clearAllBuffers();
 		}
 
 		foreach (func_get_args() as $k => $var) {
-			echo '<pre>' . var_export($var, true) . '</pre>';
+			$output .= '<pre>' . var_export($var, true) . '</pre>';
 		}
 
 		if ($this->config('backtrace')) {
-			echo $this->getBacktraceHtml();
+			$output .= $this->getBacktraceHtml();
+		}
+
+		if($this->config['echo']){
+			echo $output;
 		}
 
 		if ($this->config('exit')) {
 			exit;
 		}
+
+		return $output;
 	}
 
 	protected function clearAllBuffers()
@@ -82,7 +89,7 @@ class Dumper {
 	 *
 	 * @return string
 	 */
-	protected function getBacktraceHtml()
+	public function getBacktraceHtml()
 	{
 		$export = $this->getBacktrace();
 
